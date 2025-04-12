@@ -61,6 +61,9 @@ utcTime UTCTime {..} =
 -- |
 -- Subseconds component of the ISO-8601 format compiled from picoseconds.
 --
+-- >>> picosecondsSubsecondsComponent 0
+-- ""
+--
 -- >>> picosecondsSubsecondsComponent 000_000_000_001
 -- ".000000000001"
 --
@@ -70,8 +73,9 @@ utcTime UTCTime {..} =
 -- >>> picosecondsSubsecondsComponent 100_000_000_000
 -- ".1"
 --
--- >>> picosecondsSubsecondsComponent 0
--- ""
+-- __WARNING__. This function is only supposed to be used internally, because it doesn't check for the number overflowing the picoseconds range:
+-- >>> picosecondsSubsecondsComponent 100_000_000_000_000
+-- "."
 {-# INLINE picosecondsSubsecondsComponent #-}
 picosecondsSubsecondsComponent ::
   -- | Picoseconds.
